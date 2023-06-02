@@ -1,0 +1,31 @@
+<% layout("./layouts/layout.eta") %>
+<h1><%= it.list.name %></h1>
+<a href='/lists'>All lists</a>
+<h2>Add a list item</h2>
+
+<form method="POST" action="/lists/<%= it.list.id%>/items">
+  Name: <input type="text" name="name" />
+  <input title='create list item' type="submit" value="Create list!" />
+</form>
+<h2>Lists items:</h2>
+<% if (it.listItems) { %>
+    <ul>
+    <% it.listItems.sort((a,b) => {return a.collected - b.collected}).forEach(item => { %>
+        <li>
+            <form action="/lists/<%= it.list.id%>/items/<%= item.id%>/collect" method="POST">
+            <% if (item.collected) { %>
+                <del><%= item.name%></del>
+            <%} else {%>
+                <span><%= item.name %></span> <input title="mark <%=item.name%>" type="submit" value="Mark collected!" />
+            <%}%>
+            </form>
+        </li>
+    <%});%>
+    <ul>
+
+
+<% } else { %>
+
+<h2>No items yet...</h2>
+
+<% } %>

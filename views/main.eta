@@ -1,0 +1,12 @@
+<% layout("./layouts/layout.eta") %>
+<h1>Main page</h1>
+<a href='lists'>Show Lists</a>
+<h2>Statistics:</h2>
+<% if(!Number(it.lists)) { %>
+    <h3>No shopping lists yet.</h3>
+<% } else { %>
+    <ul>
+        <li>Shopping lists: <span title='num of lists'><%= it.lists %></span></li>
+        <li>Shopping list items: <span title='num of list items'><%= it.listItems %></span></li>
+    </ul>
+<% } %>
